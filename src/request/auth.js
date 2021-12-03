@@ -27,7 +27,7 @@ export const signIn = async ({ firstName = '', lastName = '', email = '', passwo
         )
     })
 
-    if (!(responce && responce.status === 200)) throw new Error('cannot resolve the auth');
+    if (!(responce && responce.status === 200)) throw new Error('cannot signin, try again in a moment');
 
     return responce
 }

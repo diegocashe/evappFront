@@ -28,7 +28,7 @@ export default function Login({ setAlert }) {
         e.preventDefault()
         try {
             const responce = await auth(userLogData)
-            setAlert('Bienvenido Usuario', 'success')
+            setAlert('Bienvenido ' + (user.user.firstName || ''), 'success')
             const resData = await responce.json();
             setUser({
                 ...user,
@@ -77,6 +77,6 @@ export default function Login({ setAlert }) {
     };
 
     if (user.user.state) {
-        return <Navigate to='/panel' />
+        return <Navigate to='/panel/dashboard' />
     }
 }

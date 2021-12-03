@@ -113,7 +113,7 @@ export const Profile = ({ setAlert }) => {
                     <Grid container item xs={12} sm={6} >
                         <Typography variant='h7' my={1}>Cédula de identidad</Typography>
                         <TextField
-                            error={!ciRegex.test(userData.ci) && (userData.ci != null || '')}
+                            error={!ciRegex.test(userData.ci) && (userData.ci !== '') && (userData.ci !== null)}
                             helperText={'formato de cedula "V12345678"'}
                             required
                             fullWidth

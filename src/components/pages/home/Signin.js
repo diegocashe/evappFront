@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Stack, Typography } from '@mui/material'
 import Box from '@mui/system/Box'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { Link as Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -38,19 +38,9 @@ export const Signin = ({ setAlert }) => {
     });
 
     const imgs = [img1, img2, img3, img4, img5, img6, img7]
-
-    useEffect(() => {
-        console.log(userData)
-    }, [userData])
-
-    // const [showPass, setShowPass] = useState(false)
-    // const handleClickShowPassword = () => {
-    //     setShowPass(!showPass);
-    // };
-
+ 
     const handleOnChange = async (e) => {
         setUserData({ ...userData, [(e.target.id || e.target.name)]: e.target.value })
-        // console.log(userData)
     }
 
     const handleOnSubmit = async (e, setUser) => {
@@ -60,7 +50,6 @@ export const Signin = ({ setAlert }) => {
             if (!emailRegex.test(userData.email)) throw new Error('Correo invalido');
             if (!passwordRegex.test(userData.password)) throw new Error('Contraseña inválida')
             if (userData.password !== userData.confirmPassword) throw new Error('Las contraseñas no concuerdan')
-            // console.log(userData)
             const responce = await signIn({
                 firstName: userData.firstName,
                 lastName: userData.lastName,
@@ -68,11 +57,8 @@ export const Signin = ({ setAlert }) => {
                 password: userData.password,
                 userType: userData.userType
             });
-            console.log(responce);
             const userAuthData = (await responce.json()).user;
-            console.log(userAuthData);
             setUser({ ...user, user: { ...userAuthData } });
-            console.log(user)
             setAlert('funcionó', 'success');
         } catch (e) {
             setAlert('Hubo un problema: ' + e.message, 'error')
@@ -166,8 +152,8 @@ export const Signin = ({ setAlert }) => {
                             <FormControl component="fieldset">
                                 <FormLabel component="legend">Ocupación</FormLabel>
                                 <RadioGroup onChange={handleOnChange} row aria-label="Ocupación" name="userType" id="userType">
-                                    <FormControlLabel value="0" control={<Radio />} label="Profesor" checked={true} />
-                                    <FormControlLabel value="1" defaultChecked={true} control={<Radio />} label="Estudiante" />
+                                    <FormControlLabel value="0" control={<Radio />} label="Profesor"/>
+                                    <FormControlLabel value="1" control={<Radio />} label="Estudiante" />
                                 </RadioGroup>
                             </FormControl>
                             <UserContext.Consumer>
